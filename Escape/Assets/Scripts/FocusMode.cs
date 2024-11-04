@@ -11,6 +11,8 @@ public class FocusMode : MonoBehaviour
     [SerializeField] float offsetX = 0f;
     [SerializeField] float offsetY = 0f;
     [SerializeField] float offsetZ = 0f;
+
+    [SerializeField] float focusRotation = 0f;
     
     void Awake()
     {
@@ -24,6 +26,7 @@ public class FocusMode : MonoBehaviour
             playerMovement.SwitchCam();
 
             focusCamera.transform.position = new Vector3(transform.position.x + offsetX, transform.position.y + offsetY, transform.position.z + offsetZ);
+            focusCamera.transform.rotation = Quaternion.Euler(0, focusRotation, 0);
         }
     }
 }
