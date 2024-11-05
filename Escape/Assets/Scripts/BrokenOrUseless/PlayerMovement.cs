@@ -4,20 +4,34 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement instance;
+
     public GameObject cam1;
     public GameObject cam2;
-    public bool camchoice = false;
-
+    bool camchoice = true;
     bool movingPossible = true;
 
     public CharacterController controller;
     public float speed = 12f;
+
+    private void Start()
+    {
+        instance = this;
+    }
 
     void Update()
     {
         if (movingPossible)
         {
             Moving();
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.E) && camchoice == false)
+            {
+                print("ASDFKJLJH");
+                SwitchCam();
+            }
         }
     }
 
@@ -41,17 +55,18 @@ public class PlayerMovement : MonoBehaviour
     {
         camchoice = !camchoice;
         movingPossible = !movingPossible;
-        if (!camchoice)
+        // Cam1
+        if (camchoice)
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
+        // Cam2
         else
         {
-
             Cursor.lockState = CursorLockMode.None;
         }
 
-        cam1.SetActive(!camchoice);
-        cam2.SetActive(camchoice);
+        cam1.SetActive(camchoice);
+        cam2.SetActive(!camchoice);
     }
 }

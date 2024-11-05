@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Sensor
   - canPickUp
+  - Test
   layers:
   - Default
   - TransparentFX

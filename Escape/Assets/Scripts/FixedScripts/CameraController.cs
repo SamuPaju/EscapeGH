@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseLook : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     public float defMouseSensitivity = 100f;
     float mouseSensitivity;
     public Transform playerBody;
     float xRotation = 0f;
     Camera cam;
+    Vector3 defaultSpot;
+
+    bool backNormal;
+    bool lookpossible = true;
 
     public GameObject player;
     public Transform holdPos;
@@ -28,15 +32,19 @@ public class MouseLook : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         mouseSensitivity = defMouseSensitivity;
+        
 
         LayerNumber = LayerMask.NameToLayer("holdLayer"); //if your holdLayer is named differently make sure to change this ""
     }
 
     void Update()
     {
-        Look();
+        if (lookpossible)
+        {
+            Look();
+        }
 
-        if (Input.GetKeyDown(KeyCode.E)) //change E to whichever key you want to press to pick up
+        if (Input.GetKeyDown(KeyCode.F)) //change E to whichever key you want to press to pick up
         {
             if (heldObj == null) //if currently not holding anything
             {
@@ -49,6 +57,10 @@ public class MouseLook : MonoBehaviour
                     {
                         //pass in object hit into the PickUpObject function
                         PickUpObject(hit.transform.gameObject);
+                    }
+                    if (hit.transform.gameObject.GetComponent<SpotPosition>() != null)
+                    {
+                        Focus(hit);
                     }
                 }
             }
@@ -71,6 +83,21 @@ public class MouseLook : MonoBehaviour
                 ThrowObject();
             }
         }
+
+        if (backNormal)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                //mouseSensitivity = defMouseSensitivity;
+                lookpossible = true;
+                player.GetComponentInChildren<MeshRenderer>().enabled = true;
+                PlayerMovementTest.instance.ableToMove = true;
+                transform.position = defaultSpot;
+                transform.parent = player.transform;
+                backNormal = false;
+            }
+        }
     }
 
     void Look()
@@ -83,6 +110,31 @@ public class MouseLook : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
+    }
+
+    /// <summary>
+    /// Makes camera focused on a station
+    /// 0 = 0(Eteen), 90 = 0(Eteen), 180 = 90 (Oikealle), 270 = 180(Taakse), 360 = -90(Vasemmalle)
+    /// </summary>
+    /// <param name="hit"></param>
+    void Focus(RaycastHit hit)
+    {
+        //PlayerMovementTest PMT = player.GetComponent<PlayerMovementTest>();
+        SpotPosition spotPos = hit.transform.gameObject.GetComponent<SpotPosition>();
+
+        if (!backNormal)
+        {
+            player.GetComponentInChildren<MeshRenderer>().enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            //mouseSensitivity = 0f;
+            lookpossible = false;
+            PlayerMovementTest.instance.ableToMove = false;
+            transform.parent = null;
+            defaultSpot = transform.position;
+            transform.position = spotPos.spot.transform.position;
+            transform.rotation = spotPos.spot.transform.rotation;
+            backNormal = true;
+        }
     }
 
     void PickUpObject(GameObject pickUpObj)
