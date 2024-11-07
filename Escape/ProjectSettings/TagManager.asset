@@ -6,7 +6,8 @@ TagManager:
   tags:
   - Sensor
   - canPickUp
-  - Test
+  - mixer
+  - mixable
   layers:
   - Default
   - TransparentFX
