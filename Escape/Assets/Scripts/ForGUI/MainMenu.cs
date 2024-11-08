@@ -3,22 +3,26 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject settings;
+    public GameObject mainMenu;
     //if press start botton, load game scene
     public void StartGame()
     {
         SceneManager.LoadScene("test");
     }
 
-    //if press settings botton, load settings scene
+    //if press settings botton, open settings
     public void Settings()
     {
-        SceneManager.LoadScene("Settings");
+        settings.SetActive(true);
+        mainMenu.SetActive(false);
     }
 
-    //if press back botton, load main menu
+    //if press back botton, close settings and open main menu
     public void Back()
     {
-        SceneManager.LoadScene("StartScreen");
+        settings.SetActive(false);
+        mainMenu.SetActive(true);
     }
 
     public void ExitGame()
