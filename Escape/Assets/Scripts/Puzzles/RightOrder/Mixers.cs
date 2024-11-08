@@ -46,7 +46,7 @@ public class Mixers : MonoBehaviour
         }
     }
 
-    public int Mix(int bottleNumber)
+    public int Mix()
     {
         if (blueActive || yellowActive || redActive)
         {
@@ -71,7 +71,6 @@ public class Mixers : MonoBehaviour
 
     void AllDefault()
     {
-        print("Jup seems to work");
         blueActive = false;
         yellowActive = false;
         redActive = false;

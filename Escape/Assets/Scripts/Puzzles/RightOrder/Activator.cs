@@ -6,8 +6,7 @@ using UnityEngine;
 public class Activator : MonoBehaviour
 {
 
-    [SerializeField] int index;
-    [SerializeField] int bottleNumber;
+    public int index;
 
     int limitToAdd = 2;
     [SerializeField] int currentlyAdded;
@@ -25,11 +24,12 @@ public class Activator : MonoBehaviour
         Mixers.instance.SetActive(index);
     }
 
+    // Count the index
     public void SendBottleNumber()
     {
         if (currentlyAdded < limitToAdd)
         {
-            adding = Mixers.instance.Mix(bottleNumber);
+            adding = Mixers.instance.Mix();
             if (adding != index)
             {
                 currentlyAdded++;
@@ -40,6 +40,7 @@ public class Activator : MonoBehaviour
         }
     }
 
+    // Restores a bottle to default
     public void Restore()
     {
         index = 0;
