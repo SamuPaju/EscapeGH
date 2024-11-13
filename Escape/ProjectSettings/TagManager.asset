@@ -8,6 +8,7 @@ TagManager:
   - canPickUp
   - mixer
   - mixable
+  - stationPickUp
   layers:
   - Default
   - TransparentFX

@@ -14,6 +14,8 @@ public class CameraController : MonoBehaviour
 
     bool backNormal;
     bool lookpossible = true;
+    [SerializeField] bool stationMode = false;
+    RaycastHit hit;
 
     public GameObject player;
     public Transform holdPos;
@@ -50,7 +52,7 @@ public class CameraController : MonoBehaviour
             if (heldObj == null) //if currently not holding anything
             {
                 //perform raycast to check if player is looking at object within pickuprange
-                RaycastHit hit;
+                //RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
                 {
                     //make sure pickup tag is attached
@@ -62,19 +64,24 @@ public class CameraController : MonoBehaviour
                     if (hit.transform.gameObject.GetComponent<SpotPosition>() != null)
                     {
                         Focus(hit);
+                        if (hit.transform.gameObject.tag == "stationPickUp")
+                        {
+                            PickUpForStations(hit.transform.gameObject);
+                            hit.transform.gameObject.GetComponent<MCSettings>().Active();
+                        }
                     }
                 }
             }
             else
             {
-                if (canDrop == true)
+                if (canDrop == true && stationMode == false)
                 {
                     StopClipping(); //prevents object from clipping through walls
                     DropObject();
                 }
             }
         }
-        if (heldObj != null) //if player is holding object
+        if (heldObj != null && stationMode == false) //if player is holding object
         {
             MoveObject(); //keep object position at holdPos
             RotateObject();
@@ -83,6 +90,10 @@ public class CameraController : MonoBehaviour
                 StopClipping();
                 ThrowObject();
             }
+        }
+        if (stationMode == true)
+        {
+            BetterRotate();
         }
 
         if (backNormal)
@@ -97,6 +108,13 @@ public class CameraController : MonoBehaviour
                 transform.position = defaultSpot;
                 transform.parent = player.transform;
                 backNormal = false;
+                if (stationMode == true)
+                {
+                    StopClipping(); //prevents object from clipping through walls
+                    DropObject();
+                    hit.transform.gameObject.GetComponent<MCSettings>().Deactivate();
+                    stationMode = false;
+                }
             }
         }
     }
@@ -151,6 +169,23 @@ public class CameraController : MonoBehaviour
             Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
         }
     }
+
+    /// <summary>
+    /// Pickup for station objects
+    /// </summary>
+    /// <param name="pickUpObj"></param>
+    void PickUpForStations(GameObject pickUpObj)
+    {
+        heldObj = pickUpObj; //assign heldObj to the object that was hit by the raycast (no longer == null)
+        heldObjRb = pickUpObj.GetComponent<Rigidbody>(); //assign Rigidbody
+        heldObjRb.isKinematic = true;
+        //heldObjRb.transform.parent = holdPos.transform; //parent object to holdposition
+        heldObj.layer = LayerNumber; //change the object layer to the holdLayer
+        //make sure object doesnt collide with player, it can cause weird bugs
+        Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
+        stationMode = true;
+    }
+
     void DropObject()
     {
         //re-enable collision with player
@@ -187,6 +222,26 @@ public class CameraController : MonoBehaviour
             canDrop = true;
         }
     }
+
+    void BetterRotate()
+    {
+        canDrop = false;
+
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        heldObj.transform.Rotate(Vector3.down, horizontalInput);
+        heldObj.transform.Rotate(Vector3.right, verticalInput);
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            heldObj.transform.Rotate(Vector3.forward, 1);
+        }
+        if (Input.GetKey(KeyCode.R))
+        {
+            heldObj.transform.Rotate(Vector3.back, 1);
+        }
+    }
+
     void ThrowObject()
     {
         //same as drop function, but add force to object before undefining it
