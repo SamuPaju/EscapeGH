@@ -47,7 +47,7 @@ public class CameraController : MonoBehaviour
             Look();
         }
 
-        if (Input.GetKeyDown(KeyCode.F)) //change E to whichever key you want to press to pick up
+        if (Input.GetKeyUp(KeyCode.E)) //change E to whichever key you want to press to pick up
         {
             if (heldObj == null) //if currently not holding anything
             {
@@ -98,7 +98,7 @@ public class CameraController : MonoBehaviour
 
         if (backNormal)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 //mouseSensitivity = defMouseSensitivity;
@@ -111,7 +111,7 @@ public class CameraController : MonoBehaviour
                 if (stationMode == true)
                 {
                     StopClipping(); //prevents object from clipping through walls
-                    DropObject();
+                    DropForStation();
                     hit.transform.gameObject.GetComponent<MCSettings>().Deactivate();
                     stationMode = false;
                 }
@@ -195,6 +195,17 @@ public class CameraController : MonoBehaviour
         heldObj.transform.parent = null; //unparent object
         heldObj = null; //undefine game object
     }
+
+    void DropForStation()
+    {
+        //re-enable collision with player
+        Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
+        heldObj.layer = 0; //object assigned back to default layer
+        heldObjRb.isKinematic = false;
+        //heldObj.transform.parent = null; //unparent object
+        heldObj = null; //undefine game object
+    }
+
     void MoveObject()
     {
         //keep object position the same as the holdPosition position
@@ -229,16 +240,16 @@ public class CameraController : MonoBehaviour
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        heldObj.transform.Rotate(Vector3.down, horizontalInput);
+        heldObj.transform.Rotate(Vector3.back, horizontalInput);
         heldObj.transform.Rotate(Vector3.right, verticalInput);
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            heldObj.transform.Rotate(Vector3.forward, 1);
+            heldObj.transform.Rotate(Vector3.down, 90);
         }
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            heldObj.transform.Rotate(Vector3.back, 1);
+            heldObj.transform.Rotate(Vector3.up, 90);
         }
     }
 
