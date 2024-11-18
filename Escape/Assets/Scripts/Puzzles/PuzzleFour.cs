@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class PuzzleFour : MonoBehaviour
 {
     public GameObject[] cubes; // All cubes are here
     private Vector3[] positions; // Save cubes position
     private Vector3 emptySpace; // Empty spot position
-    private bool gameCompleted = false; // Is game done
+    public bool gameCompleted = false; // Is game done
     public LayerMask cubeLayer; // Layer for cubes
+
+    [SerializeField] private UnityEvent done;
+    public UnityEvent Done => done;
 
     void Start()
     {
@@ -44,7 +48,7 @@ public class PuzzleFour : MonoBehaviour
                         if (IsPuzzleComplete())
                         {
                             gameCompleted = true;
-                            Debug.Log("Yepeeee done jesus");
+                            done.Invoke();
                         }
                     }
 
