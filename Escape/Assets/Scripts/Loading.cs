@@ -1,12 +1,11 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Loading : MonoBehaviour
 {
-    [SerializeField] private TMP_Text loadingText; // Ссылка на текст "Downloading..."
+    [SerializeField] private TMP_Text loadingText; // Downloading
     [SerializeField] private string baseMessage = "Downloading";
 
     private void Start()
@@ -24,9 +23,9 @@ public class Loading : MonoBehaviour
         int dotCount = 0;
         while (true)
         {
-            // Обновляем текст с анимацией троеточия
+            // Dots animation
             loadingText.text = baseMessage + new string('.', dotCount);
-            dotCount = (dotCount + 1) % 4; // Ограничиваем количество точек до трех
+            dotCount = (dotCount + 1) % 4; //Only 3 dots
             yield return new WaitForSeconds(0.5f);
         }
     }
@@ -36,12 +35,12 @@ public class Loading : MonoBehaviour
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = false;
 
-        // Пока сцена загружается, показываем экран загрузки
+        // While scene donloading this downlpoading canvas goes
         while (!operation.isDone)
         {
             if (operation.progress >= 0.9f)
             {
-                // Когда загрузка почти завершена, активируем сцену
+                // When downloading almost done switch scenes
                 operation.allowSceneActivation = true;
             }
             yield return null;
