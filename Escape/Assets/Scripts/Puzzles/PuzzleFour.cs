@@ -9,6 +9,7 @@ public class PuzzleFour : MonoBehaviour
     public bool gameCompleted = false; // Is game done
     public LayerMask cubeLayer; // Layer for cubes
 
+    //Opening final (exit) door wheb puzzle is done;
     [SerializeField] private UnityEvent done;
     public UnityEvent Done => done;
 

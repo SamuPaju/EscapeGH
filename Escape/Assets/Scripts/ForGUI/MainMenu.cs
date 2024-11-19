@@ -5,10 +5,12 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject settings;
     public GameObject mainMenu;
+    public GameObject loadingScreen;
     //if press start botton, load game scene
     public void StartGame()
     {
-        SceneManager.LoadScene("test");
+        loadingScreen.SetActive(true);
+        FindObjectOfType<Loading>().LoadScene("test");
     }
 
     //if press settings botton, open settings
