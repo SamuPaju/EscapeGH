@@ -42,7 +42,6 @@ public class MCSettings : MonoBehaviour
         marble.SetActive(true);
         startPosHeld = transform.position;
         marbleStartPos = marble.transform.position;
-        //StartCoroutine(Calibrate());
     }
 
     public void Deactivate()
@@ -55,16 +54,6 @@ public class MCSettings : MonoBehaviour
 
     void Restart()
     {
-        transform.position = startPosHeld;
-        transform.rotation = startRot;
-        marble.transform.position = marbleStartPos;
-        marble.GetComponent<Rigidbody>().isKinematic = true;
-        marble.GetComponent<Rigidbody>().isKinematic = false;
-    }
-
-    IEnumerator Calibrate()
-    {
-        yield return new WaitForSeconds(0.2f);
         transform.position = startPosHeld;
         transform.rotation = startRot;
         marble.transform.position = marbleStartPos;
