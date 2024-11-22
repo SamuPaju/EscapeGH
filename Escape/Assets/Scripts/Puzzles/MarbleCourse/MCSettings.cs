@@ -4,60 +4,81 @@ using UnityEngine;
 
 public class MCSettings : MonoBehaviour
 {
-    bool onOff = true;
     BoxCollider boxCollider;
+    [SerializeField] Transform cam;
 
     Vector3 startPos;
     Quaternion startRot;
-    Vector3 startPosHeld;
 
     Vector3 marbleStartPos;
     [SerializeField] GameObject marble;
-    // Start is called before the first frame update
+    
     void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
-        startPos = transform.position;
+        startPos = transform.localPosition;
         startRot = transform.rotation;
+        marbleStartPos = marble.transform.localPosition;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        boxCollider.enabled = onOff;
+        Rotate();
 
-        if (onOff == false)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                Restart();
-            }
+            Restart();
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Deactivate();
         }
     }
 
     public void Active()
     {
-        onOff = false;
-        transform.position = new Vector3(transform.position.x, startPos.y + 0.57f, startPos.z);
         marble.SetActive(true);
-        startPosHeld = transform.position;
-        marbleStartPos = marble.transform.position;
     }
 
     public void Deactivate()
     {
-        onOff = true;
-        transform.position = startPos;
-        transform.rotation = startRot;
-        marble.SetActive(false);
+        Restart();
+        StationActivator.instance.QuitStation(1);
     }
 
     void Restart()
     {
-        transform.position = startPosHeld;
+        transform.localPosition = startPos;
         transform.rotation = startRot;
-        marble.transform.position = marbleStartPos;
+        marble.transform.localPosition = marbleStartPos;
         marble.GetComponent<Rigidbody>().isKinematic = true;
         marble.GetComponent<Rigidbody>().isKinematic = false;
+    }
+
+    void Rotate()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        if (cam.transform.rotation.eulerAngles.y >= 45 && cam.transform.rotation.eulerAngles.y < 135)
+        {
+            transform.Rotate(Vector3.back, horizontalInput);
+            transform.Rotate(Vector3.right, verticalInput);
+        }
+        if (cam.transform.rotation.eulerAngles.y >= 135 && cam.transform.rotation.eulerAngles.y < 225)
+        {
+            transform.Rotate(Vector3.left, horizontalInput);
+            transform.Rotate(Vector3.back, verticalInput);
+        }
+        if (cam.transform.rotation.eulerAngles.y >= 225 && cam.transform.rotation.eulerAngles.y < 315)
+        {
+            transform.Rotate(Vector3.forward, horizontalInput);
+            transform.Rotate(Vector3.left, verticalInput);
+        }
+        if (cam.transform.rotation.eulerAngles.y >= 315 && cam.transform.rotation.eulerAngles.y < 360 || cam.transform.rotation.eulerAngles.y >= 0 && cam.transform.rotation.eulerAngles.y < 45)
+        {
+            transform.Rotate(Vector3.right, horizontalInput);
+            transform.Rotate(Vector3.forward, verticalInput);
+        }
     }
 }

@@ -40,21 +40,21 @@ public class CameraController2 : MonoBehaviour
             //perform raycast to check if player is looking at object within pickuprange
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
             {
-                // For focus
+                if (hit.transform.gameObject.tag == "stationPuzzle")
+                {
+                    //PickUpForStations(hit.transform.gameObject);
+                    //hit.transform.gameObject.GetComponent<MCSettings>().Active();
+                    StationActivator.instance.ActivateStation(1);
+                }
                 if (hit.transform.gameObject.GetComponent<SpotPosition>() != null)
                 {
-                    if (hit.transform.gameObject.tag == "stationPickUp")
-                    {
-                        PickUpForStations(hit.transform.gameObject);
-                        hit.transform.gameObject.GetComponent<MCSettings>().Active();
-                    }
                     Focus(hit);
                 }
             }
         }
         if (stationMode == true)
         {
-            BetterRotate();
+            //BetterRotate();
         }
 
         if (backNormal)
@@ -68,12 +68,12 @@ public class CameraController2 : MonoBehaviour
                 transform.position = defaultSpot;
                 transform.parent = player.transform;
                 backNormal = false;
-                if (stationMode == true)
+                /*if (stationMode == true)
                 {
                     DropForStation();
                     hit.transform.gameObject.GetComponent<MCSettings>().Deactivate();
                     stationMode = false;
-                }
+                }*/
             }
         }
     }
@@ -110,7 +110,7 @@ public class CameraController2 : MonoBehaviour
         }
     }
 
-    void PickUpForStations(GameObject pickUpObj)
+    /*void PickUpForStations(GameObject pickUpObj)
     {
         heldObj = pickUpObj; //assign heldObj to the object that was hit by the raycast (no longer == null)
         heldObjRb = pickUpObj.GetComponent<Rigidbody>(); //assign Rigidbody
@@ -145,5 +145,5 @@ public class CameraController2 : MonoBehaviour
         {
             heldObj.transform.Rotate(Vector3.up, 90);
         }
-    }
+    }*/
 }

@@ -64,7 +64,7 @@ public class CameraController : MonoBehaviour
                     if (hit.transform.gameObject.GetComponent<SpotPosition>() != null)
                     {
                         Focus(hit);
-                        if (hit.transform.gameObject.tag == "stationPickUp")
+                        if (hit.transform.gameObject.tag == "stationPuzzle")
                         {
                             PickUpForStations(hit.transform.gameObject);
                             hit.transform.gameObject.GetComponent<MCSettings>().Active();

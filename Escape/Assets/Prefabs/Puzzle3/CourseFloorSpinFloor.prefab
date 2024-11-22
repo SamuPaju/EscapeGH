@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1008060777712774695}
   - component: {fileID: 4798794457122914763}
   - component: {fileID: 5852943218982451982}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CourseFloorSpinFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
