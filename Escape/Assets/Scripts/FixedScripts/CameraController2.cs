@@ -5,28 +5,34 @@ using UnityEngine;
 
 public class CameraController2 : MonoBehaviour
 {
+    [Header("Looking")]
     public float defMouseSensitivity = 100f;
     float mouseSensitivity;
-    public Transform playerBody;
     float xRotation = 0f;
-    RaycastHit hit;
     bool lookpossible = true;
-    [SerializeField] bool stationMode = false;
+
+    [Header("Player")]
+    public Transform playerBody;
+    public GameObject player;
+
+    [Header("Raycast")]
+    RaycastHit hit;
+    RaycastHit detectionHit;
+    public float detectionRange = 5f;
+
+    [Header("Positions")]
     Vector3 defaultSpot;
     bool backNormal;
-    public GameObject player;
-    public float pickUpRange = 5f;
-    private GameObject heldObj;
-    private Rigidbody heldObjRb;
 
-    // Start is called before the first frame update
+    [Header("UI")]
+    [SerializeField] GameObject interactPossible;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         mouseSensitivity = defMouseSensitivity;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (lookpossible)
@@ -34,16 +40,14 @@ public class CameraController2 : MonoBehaviour
             Look();
         }
 
-        if (Input.GetKeyUp(KeyCode.E)) //change E to whichever key you want to press to pick up
+        // Checks if player is looking at a special object when correct button is pressed
+        if (Input.GetKeyUp(KeyCode.E)) //change E to whichever key you want
         {
-            
             //perform raycast to check if player is looking at object within pickuprange
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, detectionRange))
             {
                 if (hit.transform.gameObject.tag == "stationPuzzle")
                 {
-                    //PickUpForStations(hit.transform.gameObject);
-                    //hit.transform.gameObject.GetComponent<MCSettings>().Active();
                     StationActivator.instance.ActivateStation(1);
                 }
                 if (hit.transform.gameObject.GetComponent<SpotPosition>() != null)
@@ -52,11 +56,25 @@ public class CameraController2 : MonoBehaviour
                 }
             }
         }
-        if (stationMode == true)
+
+        // Checks if player is looking at a special object all the time
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out detectionHit, detectionRange)) //change E to whichever key you want
         {
-            //BetterRotate();
+            if (detectionHit.transform.gameObject.tag == "stationPuzzle")
+            {
+                interactPossible.SetActive(true);
+            }
+            if (detectionHit.transform.gameObject.GetComponent<SpotPosition>() != null)
+            {
+                interactPossible.SetActive(true);
+            }
+        }
+        else
+        {
+            interactPossible.SetActive(false);
         }
 
+        // Goes back to normal if the player is in a focus and player presses right button
         if (backNormal)
         {
             if (Input.GetKeyDown(KeyCode.F))
@@ -68,16 +86,11 @@ public class CameraController2 : MonoBehaviour
                 transform.position = defaultSpot;
                 transform.parent = player.transform;
                 backNormal = false;
-                /*if (stationMode == true)
-                {
-                    DropForStation();
-                    hit.transform.gameObject.GetComponent<MCSettings>().Deactivate();
-                    stationMode = false;
-                }*/
             }
         }
     }
 
+    // Makes it possible to look around
     void Look()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
@@ -90,16 +103,15 @@ public class CameraController2 : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
     }
 
+    // Sets everything ready to close inspection/interaction
     void Focus(RaycastHit hit)
     {
-        //PlayerMovementTest PMT = player.GetComponent<PlayerMovementTest>();
         SpotPosition spotPos = hit.transform.gameObject.GetComponent<SpotPosition>();
 
         if (!backNormal)
         {
             player.GetComponentInChildren<MeshRenderer>().enabled = false;
             Cursor.lockState = CursorLockMode.None;
-            //mouseSensitivity = 0f;
             lookpossible = false;
             PlayerMovementTest.instance.ableToMove = false;
             transform.parent = null;
@@ -109,41 +121,4 @@ public class CameraController2 : MonoBehaviour
             backNormal = true;
         }
     }
-
-    /*void PickUpForStations(GameObject pickUpObj)
-    {
-        heldObj = pickUpObj; //assign heldObj to the object that was hit by the raycast (no longer == null)
-        heldObjRb = pickUpObj.GetComponent<Rigidbody>(); //assign Rigidbody
-        heldObjRb.isKinematic = true;
-        //make sure object doesnt collide with player, it can cause weird bugs
-        Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), true);
-        stationMode = true;
-    }
-
-    void DropForStation()
-    {
-        //re-enable collision with player
-        Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
-        heldObj.layer = 0; //object assigned back to default layer
-        heldObjRb.isKinematic = false;
-        //heldObj.transform.parent = null; //unparent object
-        heldObj = null; //undefine game object
-    }
-
-    void BetterRotate()
-    {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        heldObj.transform.Rotate(Vector3.back, horizontalInput);
-        heldObj.transform.Rotate(Vector3.right, verticalInput);
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            heldObj.transform.Rotate(Vector3.down, 90);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            heldObj.transform.Rotate(Vector3.up, 90);
-        }
-    }*/
 }

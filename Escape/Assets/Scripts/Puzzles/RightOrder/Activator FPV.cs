@@ -19,6 +19,10 @@ public class ActivatorFPV : MonoBehaviour
             // Check if hitted a bottle
             if (Physics.Raycast(ray, out var hit))
             {
+                if (hit.collider.TryGetComponent(out KeypadButton keypadButton))
+                {
+                    keypadButton.PressButton();
+                }
                 if (hit.collider.TryGetComponent(out Activator activator))
                 {
                     if (hit.transform.gameObject.tag == "mixer")

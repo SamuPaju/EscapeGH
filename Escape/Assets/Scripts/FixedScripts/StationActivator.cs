@@ -6,11 +6,15 @@ public class StationActivator : MonoBehaviour
 {
     public static StationActivator instance;
 
+
     [SerializeField] GameObject player;
+
+    [SerializeField] GameObject centralDot;
 
     [Header("Station 1 variables")]
     [SerializeField] GameObject MCDec;
     [SerializeField] GameObject MCFunc;
+    [SerializeField] GameObject controls;
 
     // Start is called before the first frame update
     void Start()
@@ -30,11 +34,13 @@ public class StationActivator : MonoBehaviour
     public void ActivateStation(int stationIndex)
     {
         player.SetActive(false);
+        centralDot.SetActive(false);
 
         if (stationIndex == 1)
         {
             MCDec.SetActive(false);
             MCFunc.SetActive(true);
+            controls.SetActive(true);
         }
     }
 
@@ -44,11 +50,13 @@ public class StationActivator : MonoBehaviour
     public void QuitStation(int stationIndex)
     {
         player.SetActive(true);
+        centralDot.SetActive(true);
 
         if (stationIndex == 1)
         {
             MCDec.SetActive(true);
             MCFunc.SetActive(false);
+            controls.SetActive(false);
         }
     }
 }
