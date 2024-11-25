@@ -58,7 +58,7 @@ public class RightOrder : MonoBehaviour
             {
                 // If save call corectOrder metod
                 correctOrder.Invoke();
-                startGame.Welcome?.Invoke();
+                //startGame.Welcome?.Invoke();
 
                 Debug.Log("Puzzle state loaded: Completed");
             }

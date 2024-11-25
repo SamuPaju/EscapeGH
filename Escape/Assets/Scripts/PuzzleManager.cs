@@ -10,8 +10,8 @@ public class PuzzleManager : MonoBehaviour
 
     private void Start()
     {
-        LoadPlayerPosition();
-        //DeleteAllSaves();
+        //LoadPlayerPosition();
+        DeleteAllSaves();
     }
 
     private void Update()
