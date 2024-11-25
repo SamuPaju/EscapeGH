@@ -62,23 +62,23 @@ public class MCSettings : MonoBehaviour
 
         if (cam.transform.rotation.eulerAngles.y >= 45 && cam.transform.rotation.eulerAngles.y < 135)
         {
-            transform.Rotate(Vector3.back, horizontalInput);
-            transform.Rotate(Vector3.right, verticalInput);
-        }
-        if (cam.transform.rotation.eulerAngles.y >= 135 && cam.transform.rotation.eulerAngles.y < 225)
-        {
             transform.Rotate(Vector3.left, horizontalInput);
             transform.Rotate(Vector3.back, verticalInput);
         }
-        if (cam.transform.rotation.eulerAngles.y >= 225 && cam.transform.rotation.eulerAngles.y < 315)
+        if (cam.transform.rotation.eulerAngles.y >= 135 && cam.transform.rotation.eulerAngles.y < 225)
         {
             transform.Rotate(Vector3.forward, horizontalInput);
             transform.Rotate(Vector3.left, verticalInput);
         }
-        if (cam.transform.rotation.eulerAngles.y >= 315 && cam.transform.rotation.eulerAngles.y < 360 || cam.transform.rotation.eulerAngles.y >= 0 && cam.transform.rotation.eulerAngles.y < 45)
+        if (cam.transform.rotation.eulerAngles.y >= 225 && cam.transform.rotation.eulerAngles.y < 315)
         {
             transform.Rotate(Vector3.right, horizontalInput);
             transform.Rotate(Vector3.forward, verticalInput);
+        }
+        if (cam.transform.rotation.eulerAngles.y >= 315 && cam.transform.rotation.eulerAngles.y < 360 || cam.transform.rotation.eulerAngles.y >= 0 && cam.transform.rotation.eulerAngles.y < 45)
+        {
+            transform.Rotate(Vector3.back, horizontalInput);
+            transform.Rotate(Vector3.right, verticalInput);
         }
     }
 }
