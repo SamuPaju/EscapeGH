@@ -10,12 +10,12 @@ public class Pause : MonoBehaviour
     public GameObject pause;
 
     private PlayerMovementTest playerMovement;
-    private CameraController cameraController;
+    private CameraController2 cameraController;
 
     private void Start()
     {
         playerMovement = player.GetComponent<PlayerMovementTest>();
-        cameraController = player.GetComponentInChildren<CameraController>();
+        cameraController = player.GetComponentInChildren<CameraController2>();
     }
 
     private void Update()
