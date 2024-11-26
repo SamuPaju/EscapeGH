@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EndMarble : MonoBehaviour
 {
+    [SerializeField] public bool puzzleDone = false;
     private void OnTriggerEnter(Collider other)
     {
-        print("psaldokiwuråmvieckzo");
+        puzzleDone = true;
     }
 }

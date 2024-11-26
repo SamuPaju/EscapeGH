@@ -1,46 +1,43 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
-    public static PlayerInteract Instance { get; private set; }
-    private Keyboard keyboard;
+    public GameObject hintText; // Hint text
+    public Transform hintPosition; // Text position
+    private Transform player; // Player
 
-    private void Start()
+    void Start()
     {
-        Instance = this;
-        keyboard = Keyboard.current;
-    }
+        // Player need to have tag
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
-    private void Update()
-    {
-        Interact();
-    }
-
-    private void Interact()
-    {
-        if (keyboard.eKey.IsPressed())
+        if (hintText != null)
         {
-            IInteractable interactable = GetInteract();
-            if (interactable != null)
-            {
-                interactable.Interact();
-            }
+            hintText.SetActive(false);
         }
     }
 
-    public IInteractable GetInteract()
+    void Update()
     {
-        float interactRange = 1f;
-
-        Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange);
-        foreach (Collider collider in colliders)
+        if (hintText != null && player != null)
         {
-            if (collider.TryGetComponent(out IInteractable interactable))
+            float distance = Vector3.Distance(player.position, transform.position);
+
+            // Turn on text
+            if (distance < 2f) // Distance to turn on text
             {
-                return interactable;
+                hintText.SetActive(true);
+
+                // Put text next to object
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(hintPosition.position);
+                hintText.transform.position = screenPos;
+            }
+            else
+            {
+                hintText.SetActive(false);
             }
         }
-        return null;
     }
 }

@@ -118,7 +118,7 @@ namespace NavKeypad
             keypadDisplayText.text = currentInput;
         }
 
-        private void AccessGranted()
+        public void AccessGranted()
         {
             accessWasGranted = true;
             keypadDisplayText.text = accessGrantedText;
