@@ -1,6 +1,7 @@
-﻿using NavKeypad;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 using System.IO;
+using NavKeypad;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private EndMarble endMarble;
     [SerializeField] private PuzzleFour puzzleFour;
     [SerializeField] private Transform player;
+    [SerializeField] private StartGame startGame;
 
     private string saveFilePath;
 
@@ -17,11 +19,11 @@ public class PuzzleManager : MonoBehaviour
         Debug.Log($"Save file path: {Application.persistentDataPath}/saveData.json");
         saveFilePath = Path.Combine(Application.persistentDataPath, "saveData.json");
 
-        // Загружаем сохранение позиции игрока при запуске
-        //LoadPlayerPosition();
+        // Load the player's position save on startup
+        LoadPlayerPosition();
 
-        // Удалить сохранения, если нужно (временно)
-        DeleteAllSaves();
+        // Delete saves if needed (temporarily)
+        //DeleteAllSaves();
     }
 
     private void Update()
@@ -34,9 +36,16 @@ public class PuzzleManager : MonoBehaviour
 
     private void FirstPuzzle()
     {
-        if (rightOrder != null && rightOrder.puzzleIsDone)
+        if (rightOrder != null)
         {
-            SavePlayerPosition();
+            // If the first puzzle is completed, save the welcome event
+            if (rightOrder.puzzleIsDone && !HasWelcomeEventBeenTriggered())
+            {
+                SaveWelcomeEventState();
+                rightOrder.correctOrder?.Invoke();
+                SaveAccessGrantedEventState();
+                SavePlayerPosition();
+            }
         }
     }
 
@@ -68,41 +77,73 @@ public class PuzzleManager : MonoBehaviour
     {
         if (player != null)
         {
-            // Создаем объект для хранения данных
-            SaveData saveData = new SaveData
-            {
-                playerPosition = new Vector3Data(player.position)
-            };
+            // Create an object to store data
+            SaveData saveData = LoadSaveData();
+            saveData.playerPosition = new Vector3Data(player.position);
 
-            // Конвертируем данные в JSON
-            string jsonData = JsonUtility.ToJson(saveData, true);
-
-            // Сохраняем JSON в файл
-            File.WriteAllText(saveFilePath, jsonData);
-
+            // Save JSON to a file
+            SaveToFile(saveData);
             Debug.Log("Player position saved to JSON.");
         }
+    }
+
+    private void SaveWelcomeEventState()
+    {
+        SaveData saveData = LoadSaveData();
+
+        //Save state only if the event has not been saved yet
+        if (!saveData.isWelcomeEventTriggered)
+        {
+            saveData.isWelcomeEventTriggered = true;
+            SaveToFile(saveData);
+            Debug.Log("Welcome event state saved.");
+        }
+    }
+
+    private void SaveAccessGrantedEventState()
+    {
+        SaveData saveData = LoadSaveData();
+        saveData.isAccessGrantedTriggered = true;
+
+        SaveToFile(saveData);
+        Debug.Log("Access granted event state saved.");
     }
 
     private void LoadPlayerPosition()
     {
         if (File.Exists(saveFilePath))
         {
-            // Читаем JSON из файла
-            string jsonData = File.ReadAllText(saveFilePath);
+            SaveData saveData = LoadSaveData();
 
-            // Конвертируем JSON обратно в объект
-            SaveData saveData = JsonUtility.FromJson<SaveData>(jsonData);
+            if (saveData.playerPosition != null)
+            {
+                player.position = saveData.playerPosition.ToVector3();
+                Debug.Log("Player position loaded from JSON.");
+            }
 
-            // Восстанавливаем позицию игрока
-            player.position = saveData.playerPosition.ToVector3();
+            //Check if the Welcome event has already been called
+            if (saveData.isWelcomeEventTriggered && startGame?.welcome != null)
+            {
+                startGame.welcome.Invoke();
+                Debug.Log("Welcome event re-triggered.");
+            }
 
-            Debug.Log("Player position loaded from JSON.");
+            if (saveData.isAccessGrantedTriggered && rightOrder?.correctOrder != null)
+            {
+                rightOrder.correctOrder.Invoke();
+                Debug.Log("Access granted event re-triggered.");
+            }
         }
         else
         {
             Debug.Log("No saved player position found.");
         }
+    }
+
+    private bool HasWelcomeEventBeenTriggered()
+    {
+        SaveData saveData = LoadSaveData();
+        return saveData.isWelcomeEventTriggered;
     }
 
     private void DeleteAllSaves()
@@ -114,11 +155,30 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    // Классы для хранения данных
+    private SaveData LoadSaveData()
+    {
+        if (File.Exists(saveFilePath))
+        {
+            string jsonData = File.ReadAllText(saveFilePath);
+            return JsonUtility.FromJson<SaveData>(jsonData);
+        }
+
+        return new SaveData();
+    }
+
+    private void SaveToFile(SaveData saveData)
+    {
+        string jsonData = JsonUtility.ToJson(saveData, true);
+        File.WriteAllText(saveFilePath, jsonData);
+    }
+
+    // Classes for storing data
     [System.Serializable]
     public class SaveData
     {
         public Vector3Data playerPosition;
+        public bool isWelcomeEventTriggered;
+        public bool isAccessGrantedTriggered;
     }
 
     [System.Serializable]

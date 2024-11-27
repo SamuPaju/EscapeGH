@@ -6,21 +6,13 @@ public class RightOrder : MonoBehaviour
     [SerializeField] Activator[] bottles;
 
     [Header("Events")]
-    [SerializeField] private UnityEvent correctOrder;
+    [SerializeField] public UnityEvent correctOrder;
     [SerializeField] private UnityEvent incorrectOrder;
 
     public bool puzzleIsDone = false;
 
     public UnityEvent OnAccessGranted => correctOrder;
     public UnityEvent OnAccessDenied => incorrectOrder;
-
-    private StartGame startGame;
-
-    private void Start()
-    {
-        // Load puzzle state when game start 
-        LoadPuzzleState();
-    }
 
     public void Update()
     {
@@ -30,46 +22,11 @@ public class RightOrder : MonoBehaviour
             {
                 correctOrder.Invoke();
                 puzzleIsDone = true;
-
-                // Save puzzle state
-                SavePuzzleState();
             }
         }
         else
         {
             incorrectOrder.Invoke();
-        }
-    }
-
-    private void SavePuzzleState()
-    {
-        PlayerPrefs.SetInt("PuzzleCompleted", puzzleIsDone ? 1 : 0); // Save
-        PlayerPrefs.Save();
-        Debug.Log("Puzzle state saved.");
-    }
-
-    private void LoadPuzzleState()
-    {
-        if (PlayerPrefs.HasKey("PuzzleCompleted"))
-        {
-            puzzleIsDone = PlayerPrefs.GetInt("PuzzleCompleted") == 1;
-
-            if (puzzleIsDone)
-            {
-                // If save call corectOrder metod
-                correctOrder.Invoke();
-                //startGame.Welcome?.Invoke();
-
-                Debug.Log("Puzzle state loaded: Completed");
-            }
-            else
-            {
-                Debug.Log("Puzzle state loaded: Not Completed");
-            }
-        }
-        else
-        {
-            Debug.Log("No saved puzzle state found.");
         }
     }
 }
