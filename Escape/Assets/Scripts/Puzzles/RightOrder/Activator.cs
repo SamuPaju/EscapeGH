@@ -49,13 +49,4 @@ public class Activator : MonoBehaviour
         childLiquid.GetComponent<MeshRenderer>().enabled = false;
         childLiquid.GetComponent<MeshRenderer>().material = materials[index];
     }
-
-    public void InteractPossible()
-    {
-        interact.SetActive(true);
-    }
-    public void InteractNotPossible()
-    {
-        interact.SetActive(false);
-    }
 }
