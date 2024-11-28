@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class Mixers : MonoBehaviour
 {
-
     public static Mixers instance;
 
     bool blueActive;
     bool yellowActive;
     bool redActive;
 
+    [SerializeField] GameObject activeB; 
+    [SerializeField] GameObject activeY; 
+    [SerializeField] GameObject activeR;
+
     // Start is called before the first frame update
     void Start()
     {
         instance = this;   
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SetActive(int index)

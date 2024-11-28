@@ -36,6 +36,20 @@ public class ActivatorFPV : MonoBehaviour
                 }
             }
         }
+        if (Physics.Raycast(ray, out var hitC))
+        {
+            if (hitC.collider.TryGetComponent(out Activator activator))
+            {
+                if (hitC.transform.gameObject.tag == "mixer")
+                {
+                    activator.InteractPossible();
+                }
+                else if (hitC.transform.gameObject.tag == "mixable")
+                {
+                    activator.InteractPossible();
+                }                
+            }
+        }
         if (Input.GetMouseButtonDown(1))
         {
             // Check if hitted a bottle

@@ -9,6 +9,7 @@ TagManager:
   - mixer
   - mixable
   - stationPuzzle
+  - marble
   layers:
   - Default
   - TransparentFX

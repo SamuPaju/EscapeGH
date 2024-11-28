@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Activator : MonoBehaviour
 {
-
     public int index;
 
     int limitToAdd = 2;
@@ -15,6 +14,7 @@ public class Activator : MonoBehaviour
     [SerializeField] GameObject childLiquid;
     [SerializeField] Material[] materials;
 
+    [SerializeField] GameObject interact;
 
     /// <summary>
     /// Send the index of a bottle to the Mixers script
@@ -48,5 +48,14 @@ public class Activator : MonoBehaviour
         adding = 0;
         childLiquid.GetComponent<MeshRenderer>().enabled = false;
         childLiquid.GetComponent<MeshRenderer>().material = materials[index];
+    }
+
+    public void InteractPossible()
+    {
+        interact.SetActive(true);
+    }
+    public void InteractNotPossible()
+    {
+        interact.SetActive(false);
     }
 }
