@@ -10,9 +10,9 @@ public class Mixers : MonoBehaviour
     bool yellowActive;
     bool redActive;
 
-    [SerializeField] GameObject activeB; 
-    [SerializeField] GameObject activeY; 
-    [SerializeField] GameObject activeR;
+    public GameObject activeBlue; 
+    public GameObject activeYellow; 
+    public GameObject activeRed;
 
     // Start is called before the first frame update
     void Start()
@@ -32,14 +32,17 @@ public class Mixers : MonoBehaviour
         if (index == 1)
         {
             blueActive = true;
+            activeBlue.SetActive(true);
         }
         else if (index == 2)
         {
             yellowActive = true;
+            activeYellow.SetActive(true);
         }
         else if (index == 4)
         {
             redActive = true;
+            activeRed.SetActive(true);
         }
     }
 
@@ -69,7 +72,10 @@ public class Mixers : MonoBehaviour
     void AllDefault()
     {
         blueActive = false;
+        activeBlue.SetActive(false);
         yellowActive = false;
+        activeYellow.SetActive(false);
         redActive = false;
+        activeRed.SetActive(false);
     }
 }
