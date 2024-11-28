@@ -5,12 +5,12 @@ using UnityEngine.Events;
 
 public class DisplayAnimatedText : MonoBehaviour
 {
-    public TextMeshProUGUI textDisplay; // Ссылка на TextMeshPro - Text
-    public string[] messages; // Массив строк для отображения
-    public float typingSpeed = 0.05f; // Скорость анимации текста
-    public float delayBeforeClear = 1f; // Задержка перед исчезновением текста после проигрывания всех строк
+    public TextMeshProUGUI textDisplay; // TextMesh Pro
+    public string[] messages; // All lines
+    public float typingSpeed = 0.05f; // Animation speed
+    public float delayBeforeClear = 1f; // Time before clean
 
-    private bool isTextStarted = false; // Отслеживает, был ли текст уже запущен
+    private bool isTextStarted = false; // Was text used??
     private bool isTyping = false;
 
     [SerializeField] private UnityEvent startText;
@@ -19,9 +19,9 @@ public class DisplayAnimatedText : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !isTextStarted) // Проверяем тег игрока и статус текста
+        if (other.CompareTag("Player") && !isTextStarted) // Player tag and text status
         {
-            isTextStarted = true; // Отмечаем, что текст уже запускался
+            isTextStarted = true; // Start text
             StartCoroutine(PlayTextSequence());
         }
     }
@@ -30,23 +30,23 @@ public class DisplayAnimatedText : MonoBehaviour
     {
         foreach (string message in messages)
         {
-            yield return StartCoroutine(AnimateText(message)); // Проигрываем каждую строку по очереди
-            yield return new WaitForSeconds(1f); // Задержка между строками
+            yield return StartCoroutine(AnimateText(message)); // Every lines go after each other
+            yield return new WaitForSeconds(1f); // Wait
         }
 
-        yield return new WaitForSeconds(delayBeforeClear); // Ожидание перед очисткой текста
-        textDisplay.text = ""; // Убираем текст с экрана
+        yield return new WaitForSeconds(delayBeforeClear); // Wait before clean text
+        textDisplay.text = ""; // Delete text from the screen
         startText.Invoke();
     }
 
     private IEnumerator AnimateText(string message)
     {
         isTyping = true;
-        textDisplay.text = ""; // Очищаем текст перед началом
+        textDisplay.text = ""; // Delete text before start
         foreach (char letter in message)
         {
-            textDisplay.text += letter; // Постепенно добавляем символы
-            yield return new WaitForSeconds(typingSpeed); // Задержка между символами
+            textDisplay.text += letter; // Goes letter by letter
+            yield return new WaitForSeconds(typingSpeed); // Wait betwen letters
         }
         isTyping = false;
     }

@@ -5,9 +5,10 @@ using UnityEngine.Events;
 
 public class EndMarble : MonoBehaviour
 {
-    [SerializeField] private UnityEvent goal;
+    [SerializeField] public UnityEvent goal;
     public UnityEvent Goal => goal;
     [SerializeField] public bool puzzleDone = false;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("marble"))

@@ -11,8 +11,8 @@ public class RightOrder : MonoBehaviour
 
     public bool puzzleIsDone = false;
 
-    public UnityEvent OnAccessGranted => correctOrder;
-    public UnityEvent OnAccessDenied => incorrectOrder;
+    public UnityEvent OnGranted => correctOrder;
+    public UnityEvent OnDenied => incorrectOrder;
 
     public void Update()
     {

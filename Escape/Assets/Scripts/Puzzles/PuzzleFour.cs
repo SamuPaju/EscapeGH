@@ -11,7 +11,7 @@ public class PuzzleFour : MonoBehaviour
     public LayerMask cubeLayer; // Layer for cubes
 
     // Opening final (exit) door when puzzle is done
-    [SerializeField] private UnityEvent done;
+    [SerializeField] public UnityEvent done;
     public UnityEvent Done => done;
 
     void Start()

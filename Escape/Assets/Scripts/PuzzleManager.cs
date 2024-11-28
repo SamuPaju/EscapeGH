@@ -20,10 +20,10 @@ public class PuzzleManager : MonoBehaviour
         saveFilePath = Path.Combine(Application.persistentDataPath, "saveData.json");
 
         // Load the player's position save on startup
-        LoadPlayerPosition();
+        //LoadPlayerPosition();
 
         // Delete saves if needed (temporarily)
-        //DeleteAllSaves();
+        DeleteAllSaves();
     }
 
     private void Update()
@@ -43,7 +43,7 @@ public class PuzzleManager : MonoBehaviour
             {
                 SaveWelcomeEventState();
                 rightOrder.correctOrder?.Invoke();
-                SaveAccessGrantedEventState();
+                SaveGrantedEventState();
                 SavePlayerPosition();
             }
         }
@@ -54,6 +54,7 @@ public class PuzzleManager : MonoBehaviour
         if (keypad.accessWasGranted == true)
         {
             SavePlayerPosition();
+            SaveAccessGrantedEventState();
         }
     }
 
@@ -70,6 +71,8 @@ public class PuzzleManager : MonoBehaviour
         if (puzzleFour != null && puzzleFour.gameCompleted == true)
         {
             SavePlayerPosition();
+            Done();
+
         }
     }
 
@@ -100,6 +103,15 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
+    private void SaveGrantedEventState()
+    {
+        SaveData saveData = LoadSaveData();
+        saveData.isGrantedTriggered = true;
+
+        SaveToFile(saveData);
+        Debug.Log("Access granted event state saved.");
+    }
+
     private void SaveAccessGrantedEventState()
     {
         SaveData saveData = LoadSaveData();
@@ -107,6 +119,16 @@ public class PuzzleManager : MonoBehaviour
 
         SaveToFile(saveData);
         Debug.Log("Access granted event state saved.");
+    }
+
+    private void Done()
+    {
+        SaveData saveData = LoadSaveData();
+        saveData.Done = true;
+
+        SaveToFile(saveData);
+        Debug.Log("Last save saved");
+
     }
 
     private void LoadPlayerPosition()
@@ -128,10 +150,22 @@ public class PuzzleManager : MonoBehaviour
                 Debug.Log("Welcome event re-triggered.");
             }
 
-            if (saveData.isAccessGrantedTriggered && rightOrder?.correctOrder != null)
+            if (saveData.isGrantedTriggered && rightOrder?.correctOrder != null)
             {
                 rightOrder.correctOrder.Invoke();
                 Debug.Log("Access granted event re-triggered.");
+            }
+
+            if (saveData.isAccessGrantedTriggered && keypad?.onAccessGranted != null)
+            {
+                keypad.onAccessGranted.Invoke();
+                Debug.Log("Access granted event re-triggered.");
+            }
+
+            if (saveData.Done && puzzleFour?.done != null)
+            {
+                puzzleFour.done.Invoke();
+                Debug.Log("Done.");
             }
         }
         else
@@ -178,7 +212,9 @@ public class PuzzleManager : MonoBehaviour
     {
         public Vector3Data playerPosition;
         public bool isWelcomeEventTriggered;
+        public bool isGrantedTriggered;
         public bool isAccessGrantedTriggered;
+        public bool Done;
     }
 
     [System.Serializable]
