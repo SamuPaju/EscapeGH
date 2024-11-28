@@ -13140,9 +13140,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3717650647260726360}
     m_Modifications:
+    - target: {fileID: 2352385930748052107, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571946422744921710, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625218833506740666, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5100002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625218833506740666, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625218833506740666, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.055000305
+      objectReference: {fileID: 0}
     - target: {fileID: 5101425894427831345, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
       propertyPath: m_Name
       value: MarbleCourses
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914097682119532768, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5100002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914097682119532768, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914097682119532768, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.055000305
       objectReference: {fileID: 0}
     - target: {fileID: 8147631660314775318, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
       propertyPath: m_LocalPosition.x

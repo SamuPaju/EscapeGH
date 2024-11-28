@@ -33,6 +33,11 @@ public class MCSettings : MonoBehaviour
         {
             Deactivate();
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            marble.transform.localPosition = new Vector3(0.2391f, 0.492f, -0.2114f);
+        }
     }
 
     public void Active()
