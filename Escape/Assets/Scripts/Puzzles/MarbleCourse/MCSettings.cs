@@ -62,8 +62,8 @@ public class MCSettings : MonoBehaviour
 
     void Rotate()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis("Horizontal") * 0.5f;
+        float verticalInput = Input.GetAxis("Vertical") * 0.5f;
 
         if (cam.transform.rotation.eulerAngles.y >= 45 && cam.transform.rotation.eulerAngles.y < 135)
         {
