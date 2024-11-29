@@ -15,9 +15,9 @@ public class CameraController2 : MonoBehaviour
     public GameObject player;
 
     [Header("Raycast")]
+    public float detectionRange = 5f;
     RaycastHit hit;
     RaycastHit detectionHit;
-    public float detectionRange = 5f;
 
     [Header("Positions")]
     Vector3 defaultSpot;
