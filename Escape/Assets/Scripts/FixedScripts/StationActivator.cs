@@ -6,9 +6,7 @@ public class StationActivator : MonoBehaviour
 {
     public static StationActivator instance;
 
-
     [SerializeField] GameObject player;
-
     [SerializeField] GameObject centralDot;
 
     [Header("Station 1 variables")]
@@ -27,6 +25,7 @@ public class StationActivator : MonoBehaviour
     /// </summary>
     public void ActivateStation(int stationIndex)
     {
+        // Checks which station needs to be activated
         if (stationIndex == 1 && completed)
         {
             player.SetActive(false);
@@ -35,6 +34,11 @@ public class StationActivator : MonoBehaviour
             MCDec.SetActive(false);
             MCFunc.SetActive(true);
             controls.SetActive(true);
+        }
+
+        else
+        {
+            Debug.Log("Sorry but there insn't a station with index: " +  stationIndex);
         }
     }
 
@@ -46,18 +50,24 @@ public class StationActivator : MonoBehaviour
         player.SetActive(true);
         //centralDot.SetActive(true);
 
-        if (stationIndex == 1)
+        // Checks which station needs to be deactivated
+        if (stationIndex == 1) // Station 1 Quit
         {
             MCDec.SetActive(true);
             MCFunc.SetActive(false);
             controls.SetActive(false);
         }
-        if (stationIndex == 2)
+        if (stationIndex == 2) // Station 1 Win
         {
             MCDec.SetActive(true);
             MCFunc.SetActive(false);
             controls.SetActive(false);
             completed = false;
+        }
+
+        else
+        {
+            Debug.Log("Sorry but there insn't a station with index: " + stationIndex);
         }
     }
 }

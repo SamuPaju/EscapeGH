@@ -9,22 +9,23 @@ public class ActivatorFPV : MonoBehaviour
 
     private void Awake() => cam = Camera.main;
 
-    // Update is called once per frame
     void Update()
     {
         var ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) // Left mouse button
         {
-            // Check if hitted a bottle
+            // Does the Raycast
             if (Physics.Raycast(ray, out var hit))
             {
+                // Checks if the Raycast hitted a keypad or bottles
                 if (hit.collider.TryGetComponent(out KeypadButton keypadButton))
                 {
                     keypadButton.PressButton();
                 }
                 if (hit.collider.TryGetComponent(out Activator activator))
                 {
+                    // Checks which bottles were hit
                     if (hit.transform.gameObject.tag == "mixer")
                     {
                         activator.SendIndex();
@@ -37,13 +38,15 @@ public class ActivatorFPV : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1)) // Right mouse button
         {
-            // Check if hitted a bottle
+            // Does the Raycast
             if (Physics.Raycast(ray, out var hit))
             {
+                // Gets the hitted coomponents Activator script
                 if (hit.collider.TryGetComponent(out Activator activator))
                 {
+                    // Check if hitted a mixable
                     if (hit.transform.gameObject.tag == "mixable")
                     {
                         activator.Restore();

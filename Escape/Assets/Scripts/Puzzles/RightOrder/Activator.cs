@@ -24,12 +24,17 @@ public class Activator : MonoBehaviour
         Mixers.instance.SetActive(index);
     }
 
-    // Count the index
+    /// <summary>
+    /// Counts the index and sets the liquid material according to the index
+    /// </summary>
     public void SendBottleNumber()
     {
+        // Checks that player isn't adding colors too many times
         if (currentlyAdded < limitToAdd)
         {
+            // Get the value of the mixer
             adding = Mixers.instance.Mix();
+            // Checks that the same color wasn't added twice
             if (adding != index)
             {
                 currentlyAdded++;
@@ -40,7 +45,9 @@ public class Activator : MonoBehaviour
         }
     }
 
-    // Restores a bottle to default
+    /// <summary>
+    /// Restores a bottle to default
+    /// </summary>
     public void Restore()
     {
         index = 0;

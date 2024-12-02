@@ -21,13 +21,15 @@ public class CameraController2 : MonoBehaviour
 
     [Header("Positions")]
     Vector3 defaultSpot;
-    bool backNormal;
+
+    bool focusMode;
 
     [Header("UI")]
     [SerializeField] GameObject interactPossible;
 
     void Start()
     {
+        // Lock the mouse and set the mousesensitivity
         Cursor.lockState = CursorLockMode.Locked;
         mouseSensitivity = defMouseSensitivity;
     }
@@ -40,9 +42,9 @@ public class CameraController2 : MonoBehaviour
         }
 
         // Checks if player is looking at a special object when correct button is pressed
-        if (Input.GetKeyUp(KeyCode.E)) //change E to whichever key you want
+        if (Input.GetKeyUp(KeyCode.E))
         {
-            //perform raycast to check if player is looking at object within pickuprange
+            // Performs raycast to check if player is looking at object within pickuprange
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, detectionRange))
             {
                 if (hit.transform.gameObject.tag == "stationPuzzle")
@@ -74,50 +76,66 @@ public class CameraController2 : MonoBehaviour
         }
 
         // Goes back to normal if the player is in a focus and player presses right button
-        if (backNormal)
+        if (focusMode)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
+                // Sets all back from Focus
                 Cursor.lockState = CursorLockMode.Locked;
                 lookpossible = true;
                 player.GetComponentInChildren<MeshRenderer>().enabled = true;
                 PlayerMovementTest.instance.ableToMove = true;
                 transform.position = defaultSpot;
                 transform.parent = player.transform;
-                backNormal = false;
+                focusMode = false;
             }
         }
     }
 
-    // Makes it possible to look around
+    /// <summary>
+    /// Makes it possible to look around
+    /// </summary>
     void Look()
     {
+        // Get mouse movement
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
+        // Makes the up and down rotation but limits how high up or low down player can look
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
+        // Rotates camera and player horizontally
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
     }
 
-    // Sets everything ready to close inspection/interaction
+    /// <summary>
+    /// Sets everything ready to close inspection/interaction
+    /// </summary>
+    /// <param name="hit"></param>
     void Focus(RaycastHit hit)
     {
         SpotPosition spotPos = hit.transform.gameObject.GetComponent<SpotPosition>();
 
-        if (!backNormal)
+        // if focus mode is false go to focus
+        if (!focusMode)
         {
+            // Disable player body
             player.GetComponentInChildren<MeshRenderer>().enabled = false;
+            // Free the mouse
             Cursor.lockState = CursorLockMode.None;
+            // Disable movement and looking
             lookpossible = false;
             PlayerMovementTest.instance.ableToMove = false;
+            // Unparent the camera
             transform.parent = null;
+            // Set all the positions and rotations
             defaultSpot = transform.position;
             transform.position = spotPos.spot.transform.position;
             transform.rotation = spotPos.spot.transform.rotation;
-            backNormal = true;
+            
+            focusMode = true;
         }
     }
 }

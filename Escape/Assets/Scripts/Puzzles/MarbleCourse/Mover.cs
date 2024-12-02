@@ -16,6 +16,7 @@ public class Mover : MonoBehaviour
 
     void Update()
     {
+        // Check which movement object should be doing
         if (moving)
         {
             MoveObject();
@@ -34,6 +35,7 @@ public class Mover : MonoBehaviour
 
     void SpinObject()
     {
+        // Check which direction object should be rotating
         if (spinVecUp == true)
         {
             transform.Rotate(Vector3.up * speed * Time.deltaTime);

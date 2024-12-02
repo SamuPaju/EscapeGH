@@ -20,6 +20,10 @@ public class Mixers : MonoBehaviour
         instance = this;   
     }
 
+    /// <summary>
+    /// Activates the selected mixer
+    /// </summary>
+    /// <param name="index"></param>
     public void SetActive(int index)
     {
         // If one of the mixers are active set all of them to false
@@ -46,10 +50,16 @@ public class Mixers : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks what should be returned when the player hits a mixable
+    /// </summary>
+    /// <returns></returns>
     public int Mix()
     {
+        // Check if any of the mixers are active
         if (blueActive || yellowActive || redActive)
         {
+            // Set mixers to default and return the active ones corresponding number
             if (blueActive)
             {
                 AllDefault();
@@ -69,6 +79,9 @@ public class Mixers : MonoBehaviour
         return 0;
     }
 
+    /// <summary>
+    /// Set all mixers to default
+    /// </summary>
     void AllDefault()
     {
         blueActive = false;

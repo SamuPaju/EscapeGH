@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class PlayerMovementTest : MonoBehaviour
@@ -49,11 +48,11 @@ public class PlayerMovementTest : MonoBehaviour
             velocity.y = -2f;
         }
 
+        // Gets the player input
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * x + transform.forward * z;
-
+        // Transforms the player input to Vector3
+        Vector3 move = transform.right * x + transform.forward * z; 
         controller.Move(move * speed * Time.deltaTime);
 
         // Checks if spacebar is pressed, player is on the ground and jump is allowed
@@ -63,8 +62,8 @@ public class PlayerMovementTest : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
+        // Applyes gravity to player
         velocity.y += gravity * Time.deltaTime;
-
         controller.Move(velocity * Time.deltaTime);
     }
 }

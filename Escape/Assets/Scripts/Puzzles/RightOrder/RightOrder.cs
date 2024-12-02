@@ -16,10 +16,12 @@ public class RightOrder : MonoBehaviour
 
     public void Update()
     {
+        // Checks if the bottles have correct colors (31654)
         if (bottles[0].index == 3 && bottles[1].index == 1 && bottles[2].index == 6 && bottles[3].index == 5 && bottles[4].index == 4)
         {
             if (!puzzleIsDone) // Is puzzle done
             {
+                // Invokes a UnityEvent
                 correctOrder.Invoke();
                 puzzleIsDone = true;
             }

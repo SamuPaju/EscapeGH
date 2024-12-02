@@ -25,32 +25,44 @@ public class MCSettings : MonoBehaviour
     {
         Rotate();
 
+        // R restarts
         if (Input.GetKeyDown(KeyCode.R))
         {
             Restart();
         }
+        // F quits
         if (Input.GetKeyDown(KeyCode.F))
         {
             Deactivate();
         }
 
+        // L wins the course (for testing purposes)
         if (Input.GetKeyDown(KeyCode.L))
         {
             marble.transform.localPosition = new Vector3(0.2391f, 0.492f, -0.2114f);
         }
     }
 
+    /// <summary>
+    /// Activates the game
+    /// </summary>
     public void Active()
     {
         marble.SetActive(true);
     }
 
+    /// <summary>
+    /// Deactivates the game
+    /// </summary>
     public void Deactivate()
     {
         Restart();
         StationActivator.instance.QuitStation(1);
     }
 
+    /// <summary>
+    /// Restarts the game
+    /// </summary>
     void Restart()
     {
         transform.localPosition = startPos;
@@ -60,6 +72,9 @@ public class MCSettings : MonoBehaviour
         marble.GetComponent<Rigidbody>().isKinematic = false;
     }
 
+    /// <summary>
+    /// Moves the platform
+    /// </summary>
     void Rotate()
     {
         float horizontalInput = Input.GetAxis("Horizontal") * 0.5f;
