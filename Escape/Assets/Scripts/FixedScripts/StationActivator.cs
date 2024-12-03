@@ -57,7 +57,7 @@ public class StationActivator : MonoBehaviour
             MCFunc.SetActive(false);
             controls.SetActive(false);
         }
-        if (stationIndex == 2) // Station 1 Win
+        else if (stationIndex == 2) // Station 1 Win
         {
             MCDec.SetActive(true);
             MCFunc.SetActive(false);

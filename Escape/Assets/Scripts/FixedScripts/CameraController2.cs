@@ -101,12 +101,14 @@ public class CameraController2 : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        // Makes the up and down rotation but limits how high up or low down player can look
+        // Count the rotation
         xRotation -= mouseY;
+        // Limit the rotation
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        // Set the rotation
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         // Rotates camera and player horizontally
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
     }
 
