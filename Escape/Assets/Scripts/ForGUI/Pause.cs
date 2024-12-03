@@ -20,6 +20,9 @@ public class Pause : MonoBehaviour
     private PlayerMovementTest playerMovement;
     private CameraController2 cameraController;
 
+    private bool wasCursorVisible;
+    private CursorLockMode previousCursorLockState;
+
     private void Start()
     {
         // Initialize references to player movement and camera controller scripts
@@ -32,19 +35,24 @@ public class Pause : MonoBehaviour
         // Toggle pause menu when Escape key is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            bool isPaused = !canvas.activeSelf; // Check current pause state
-            canvas.SetActive(!canvas.activeSelf); // Toggle pause menu visibility
+            bool isPaused = !canvas.activeSelf;
 
             if (isPaused)
             {
-                DisablePlayerControls(); // Disable player controls
-                ShowCursor(); // Show the mouse cursor
+                
+                wasCursorVisible = Cursor.visible;
+                previousCursorLockState = Cursor.lockState;
+
+                DisablePlayerControls();
+                ShowCursor(); 
             }
             else
             {
-                EnablePlayerControls(); // Enable player controls
-                HideCursor(); // Hide the mouse cursor
+                EnablePlayerControls();
+                RestoreCursorState(); 
             }
+
+            canvas.SetActive(isPaused);
         }
     }
 
@@ -69,11 +77,10 @@ public class Pause : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    // Hide the mouse cursor and lock it
-    private void HideCursor()
+    private void RestoreCursorState()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = wasCursorVisible;
+        Cursor.lockState = previousCursorLockState;
     }
 
     // Load the main menu scene
