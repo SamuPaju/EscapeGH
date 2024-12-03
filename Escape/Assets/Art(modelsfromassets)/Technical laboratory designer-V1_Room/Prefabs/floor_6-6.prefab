@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4000013476261890}
   - component: {fileID: 33000013566204994}
   - component: {fileID: 23000013203739282}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ceiling_2-6 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4000011279290222}
   - component: {fileID: 33000010757051008}
   - component: {fileID: 23000012947215750}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ceiling_2-6 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4000012771917564}
   - component: {fileID: 33000013793812750}
   - component: {fileID: 23000014008075160}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: floor_6-6
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -24,10 +24,10 @@ public class PuzzleManager : MonoBehaviour
         saveFilePath = Path.Combine(Application.persistentDataPath, "saveData.json");
 
         // Load saved player position and puzzle states on startup
-        LoadPlayerPosition();
+        //LoadPlayerPosition();
 
         // Delete all saves (for debugging or testing purposes)
-        //DeleteAllSaves();
+       DeleteAllSaves();
     }
 
     private void Update()
@@ -64,6 +64,7 @@ public class PuzzleManager : MonoBehaviour
             SavePlayerPosition();
             SaveAccessGrantedEventState();
             ShowSaveNotification();
+            keypad.accessWasGranted = false;
         }
     }
 
@@ -74,6 +75,7 @@ public class PuzzleManager : MonoBehaviour
         {
             SavePlayerPosition();
             ShowSaveNotification();
+            endMarble.puzzleDone = false;
         }
     }
 
@@ -88,11 +90,14 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    // Save the player's position
+    /// <summary>
+    /// Save the player's position
+    /// </summary>
     private void SavePlayerPosition()
     {
         if (player != null)
         {
+            Debug.Log("save position");
             SaveData saveData = LoadSaveData();
             saveData.playerPosition = new Vector3Data(player.position);
 
@@ -105,6 +110,7 @@ public class PuzzleManager : MonoBehaviour
     {
         if (saveNotificationText != null)
         {
+            Debug.Log("yesyes");
             StartCoroutine(ShowSaveNotificationCoroutine());
         }
     }
