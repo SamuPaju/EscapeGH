@@ -97,7 +97,6 @@ public class PuzzleManager : MonoBehaviour
     {
         if (player != null)
         {
-            Debug.Log("save position");
             SaveData saveData = LoadSaveData();
             saveData.playerPosition = new Vector3Data(player.position);
 
@@ -110,7 +109,6 @@ public class PuzzleManager : MonoBehaviour
     {
         if (saveNotificationText != null)
         {
-            Debug.Log("yesyes");
             StartCoroutine(ShowSaveNotificationCoroutine());
         }
     }
