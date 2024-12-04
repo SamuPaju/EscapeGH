@@ -39,7 +39,9 @@ public class PuzzleManager : MonoBehaviour
         FourPuzzle();
     }
 
-    // Handle logic for the first puzzle
+    /// <summary>
+    /// Handle logic for the first puzzle
+    /// </summary>
     private void FirstPuzzle()
     {
         if (rightOrder != null)
@@ -56,7 +58,9 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    // Handle logic for the second puzzle
+    /// <summary>
+    /// Handle logic for the second puzzle
+    /// </summary>
     private void SecondPuzzle()
     {
         if (keypad.accessWasGranted == true)
@@ -68,7 +72,9 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    // Handle logic for the third puzzle
+    /// <summary>
+    /// Handle logic for the third puzzle
+    /// </summary>
     private void ThirdPuzzle()
     {
         if (endMarble.puzzleDone == true)
@@ -79,7 +85,9 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    // Handle logic for the fourth puzzle
+    /// <summary>
+    /// Handle logic for the fourth puzzle
+    /// </summary>
     private void FourPuzzle()
     {
         if (puzzleFour != null && puzzleFour.gameCompleted == true)
@@ -104,7 +112,9 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    // Show a save notification for 2 seconds
+    /// <summary>
+    /// Show a save notification for 2 seconds that game saved
+    /// </summary>
     private void ShowSaveNotification()
     {
         if (saveNotificationText != null)
@@ -125,7 +135,9 @@ public class PuzzleManager : MonoBehaviour
         saveNotificationText.gameObject.SetActive(false);
     }
 
-    // Save the state of the welcome event
+    /// <summary>
+    /// Save the state of the welcome event (door's open after trigger in the beggining)
+    /// </summary>
     private void SaveWelcomeEventState()
     {
         SaveData saveData = LoadSaveData();
@@ -138,7 +150,9 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    // Save the state of the granted event (after 1 puzzle)
+    /// <summary>
+    /// Save the state of the granted event (door's open after 1 puzzle)
+    /// </summary>
     private void SaveGrantedEventState()
     {
         SaveData saveData = LoadSaveData();
@@ -148,7 +162,9 @@ public class PuzzleManager : MonoBehaviour
         Debug.Log("Access granted event state saved.");
     }
 
-    // Save the state of the access granted event (after 2 puzzle)
+    /// <summary>
+    /// Save the state of the access granted event (door's open after 2 puzzle)
+    /// </summary>
     private void SaveAccessGrantedEventState()
     {
         SaveData saveData = LoadSaveData();
@@ -158,7 +174,9 @@ public class PuzzleManager : MonoBehaviour
         Debug.Log("Access granted event state saved.");
     }
 
-    // Save the state of the fourth puzzle completion
+    /// <summary>
+    /// Save the state of the fourth puzzle completion (door's open invoke)
+    /// </summary>
     private void Done()
     {
         SaveData saveData = LoadSaveData();
@@ -168,7 +186,9 @@ public class PuzzleManager : MonoBehaviour
         Debug.Log("Last save saved");
     }
 
-    // Load the player's saved position and other puzzle states
+    /// <summary>
+    /// Load the player's saved position and other puzzle states
+    /// </summary>
     private void LoadPlayerPosition()
     {
         if (File.Exists(saveFilePath))
@@ -211,7 +231,9 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    // Check if the welcome event has already been triggered
+    /// <summary>
+    /// Check if the welcome event has already been triggered
+    /// </summary>
     private bool HasWelcomeEventBeenTriggered()
     {
         SaveData saveData = LoadSaveData();
@@ -228,7 +250,9 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    // Load saved data from file or return a new SaveData object if the file doesn't exist
+    /// <summary>
+    /// Load saved data from file or return a new SaveData object if the file doesn't exist
+    /// </summary>    
     private SaveData LoadSaveData()
     {
         if (File.Exists(saveFilePath))
@@ -240,7 +264,10 @@ public class PuzzleManager : MonoBehaviour
         return new SaveData();
     }
 
-    // Save data to file
+    /// <summary>
+    /// Save data to file
+    /// </summary>
+    /// <param name="saveData"></param>
     private void SaveToFile(SaveData saveData)
     {
         string jsonData = JsonUtility.ToJson(saveData, true);

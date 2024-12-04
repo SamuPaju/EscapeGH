@@ -18,7 +18,9 @@ public class DisplayAnimatedText : MonoBehaviour
     // Tracks whether text is currently being typed out
     private bool isTyping = false;
 
-    // UnityEvent triggered after the text sequence is complete
+    /// <summary>
+    /// UnityEvent triggered after the text sequence is complete
+    /// </summary>
     [SerializeField] private UnityEvent startText;
     public UnityEvent StartText => startText;
 
