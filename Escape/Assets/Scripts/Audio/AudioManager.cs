@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
         }
 
         // Älä tuhoa GameObjektia ladattaessa
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         // Näyttää oliotaulukon kaikki äänilähteet
         foreach (Sound s in sounds)
