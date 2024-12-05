@@ -95,6 +95,7 @@ public class PuzzleManager : MonoBehaviour
             SavePlayerPosition();
             Done();
             ShowSaveNotification();
+            puzzleFour.gameCompleted = false;
         }
     }
 
