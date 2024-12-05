@@ -1693,7 +1693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &591602261
 Transform:
   m_ObjectHideFlags: 0
@@ -1702,7 +1702,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591602260}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1716,7 +1716,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591602260}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1eda42afcc64af9419f80b8f1c2c9ec9, type: 3}
   m_Name: 
@@ -6698,14 +6698,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6374460310974301529, guid: aa50f66dea723ad43bd7aa51e3377448, type: 3}
-      propertyPath: correctOrder.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 7522101162056260095}
-    - target: {fileID: 6374460310974301529, guid: aa50f66dea723ad43bd7aa51e3377448, type: 3}
-      propertyPath: incorrectOrder.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 7522101162056260095}
     - target: {fileID: 7277163824122171815, guid: aa50f66dea723ad43bd7aa51e3377448, type: 3}
       propertyPath: m_Name
       value: Room1Puzzle
@@ -17031,17 +17023,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8837888602259023329}
   m_SourcePrefab: {fileID: 100100000, guid: e52890ebb21e7704b8a5193fa0865463, type: 3}
---- !u!114 &7522101162056260095 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2306833543389860695, guid: d62e4e4d7337f0c4a9e0da580a3af191, type: 3}
-  m_PrefabInstance: {fileID: 9085279734792045853}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a1078d7f16f5e145a3137f0c509fb51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &7527652216394167930
 BoxCollider:
   m_ObjectHideFlags: 0
