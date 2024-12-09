@@ -46,7 +46,9 @@ public class GameEnd : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         // Close the game
-        QuitGame();
+        //QuitGame();
+
+        Restart.instance.RestartGame();
     }
 
     private IEnumerator FadeIn(Image image, float duration)
