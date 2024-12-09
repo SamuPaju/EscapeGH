@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Restart : MonoBehaviour
 {
+    public static Restart instance;
+
+    private void Start()
+    {
+        instance = this;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
