@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 [System.Serializable] // Näkyy Inspectorissa
-public class Sound : MonoBehaviour
+public class Sound
 {
     // Ääni
     public AudioClip clip;
