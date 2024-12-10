@@ -14,6 +14,7 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private StartGame startGame;
     [SerializeField] private TextMeshProUGUI saveNotificationText;
+    [SerializeField] private TextMeshProUGUI puzzleIsDoneText;
 
     private string saveFilePath; // Path to the save file
 
@@ -118,7 +119,7 @@ public class PuzzleManager : MonoBehaviour
     /// </summary>
     private void ShowSaveNotification()
     {
-        if (saveNotificationText != null)
+        if (saveNotificationText != null && puzzleIsDoneText != null)
         {
             StartCoroutine(ShowSaveNotificationCoroutine());
         }
@@ -128,12 +129,14 @@ public class PuzzleManager : MonoBehaviour
     {
         // Display the save notification
         saveNotificationText.gameObject.SetActive(true);
+        puzzleIsDoneText.gameObject.SetActive(true);
 
         // Wait for 2 seconds
         yield return new WaitForSeconds(2f);
 
         // Hide the save notification
         saveNotificationText.gameObject.SetActive(false);
+        puzzleIsDoneText.gameObject.SetActive(false);
     }
 
     /// <summary>

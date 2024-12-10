@@ -8,6 +8,7 @@ public class ToggleClipboard : MonoBehaviour
     [SerializeField] private GameObject player;         // Player object (for freezing movement)
     [SerializeField] private float distanceFromCamera = 0.7f; // Distance from the camera to the clipboard
     [SerializeField] private GameObject restart;
+    [SerializeField] private GameObject pause;
 
     private PlayerMovementTest playerMovement;          // Player movement script
     private CameraController2 cameraController;         // Camera controller script
@@ -32,6 +33,7 @@ public class ToggleClipboard : MonoBehaviour
         {
             ToggleClipboardObject();
             restart.SetActive(!isClipboardActive);
+            pause.SetActive(!isClipboardActive);
         }
 
         // Handle text input if the clipboard is active
