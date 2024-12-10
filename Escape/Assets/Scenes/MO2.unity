@@ -3900,6 +3900,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3717650647260726360}
     m_Modifications:
+    - target: {fileID: 2352385930748052107, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571946422744921710, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5101425894427831345, guid: 4cdc3492cddaf1240a3848c23e4e45d9, type: 3}
       propertyPath: m_Name
       value: MarbleCourses
@@ -6664,18 +6672,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1560470952998360400, guid: aa50f66dea723ad43bd7aa51e3377448, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3236783838274049545, guid: aa50f66dea723ad43bd7aa51e3377448, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588565457228300507, guid: aa50f66dea723ad43bd7aa51e3377448, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4719576771291897517, guid: aa50f66dea723ad43bd7aa51e3377448, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14

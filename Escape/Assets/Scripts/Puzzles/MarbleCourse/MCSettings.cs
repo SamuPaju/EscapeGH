@@ -63,7 +63,7 @@ public class MCSettings : MonoBehaviour
     /// <summary>
     /// Restarts the game
     /// </summary>
-    void Restart()
+    public void Restart()
     {
         transform.localPosition = startPos;
         transform.rotation = startRot;
