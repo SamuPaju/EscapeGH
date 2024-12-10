@@ -21189,7 +21189,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 604588728166775769, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.71
+      value: -9.51
       objectReference: {fileID: 0}
     - target: {fileID: 604588728166775769, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21197,7 +21197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 604588728166775769, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.63
+      value: -9.06
       objectReference: {fileID: 0}
     - target: {fileID: 604588728166775769, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -21238,6 +21238,14 @@ PrefabInstance:
     - target: {fileID: 1998687320650050068, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920384456151488960, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
+      propertyPath: m_SlopeLimit
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920384456151488960, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
+      propertyPath: m_StepOffset
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7225545703712042986, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
       propertyPath: jumpAllowed
@@ -26996,7 +27004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 0}
+  volumeTrigger: {fileID: 792649570}
   volumeLayer:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -56384,7 +56392,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2172644033375695435, guid: d62e4e4d7337f0c4a9e0da580a3af191, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1866579284}
   m_SourcePrefab: {fileID: 100100000, guid: d62e4e4d7337f0c4a9e0da580a3af191, type: 3}
 --- !u!114 &1794979521 stripped
 MonoBehaviour:
@@ -58464,6 +58475,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000013003143470, guid: 1f5331f8e837dfd49a594d621d7b75b6, type: 3}
   m_PrefabInstance: {fileID: 1865392222}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1866579283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2172644033375695435, guid: d62e4e4d7337f0c4a9e0da580a3af191, type: 3}
+  m_PrefabInstance: {fileID: 1794979520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1866579284
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866579283}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 2.357621}
+  m_Center: {x: -0.00000012134555, y: 0, z: -0.5089602}
 --- !u!1001 &1871273344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66234,7 +66271,7 @@ Transform:
   m_GameObject: {fileID: 2110139923}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -7.59, y: 20.311, z: -37.859}
+  m_LocalPosition: {x: -7.59, y: 20.311, z: -37.907}
   m_LocalScale: {x: 0.01929291, y: 0.1443, z: 0.01929291}
   m_ConstrainProportionsScale: 0
   m_Children: []
