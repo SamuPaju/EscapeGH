@@ -16,6 +16,12 @@ public class ToggleClipboard : MonoBehaviour
     private bool wasCursorVisible;                      // To save cursor visibility state
     private CursorLockMode previousCursorLockState;     // To save cursor lock state
 
+    private string textContent = "";                   // The text content being edited
+    private int cursorPosition = 0;                     // Current cursor position
+    private float cursorBlinkTime = 0.5f;               // Time interval for blinking
+    private float blinkTimer = 0f;                      // Timer for blinking
+    private bool isCursorVisible = true;                // Cursor visibility state
+
     // Parameters for text restrictions
     [SerializeField] private int maxCharactersPerLine = 13; // Maximum characters per line
 
@@ -37,9 +43,14 @@ public class ToggleClipboard : MonoBehaviour
         }
 
         // Handle text input if the clipboard is active
-        if (isClipboardActive && Input.anyKeyDown)
+        if (isClipboardActive)
         {
-            HandleTextInput();
+            HandleCursorBlinking();
+            HandleCursorMovement();
+            if (Input.anyKeyDown)
+            {
+                HandleTextInput();
+            }
         }
     }
 
@@ -98,53 +109,111 @@ public class ToggleClipboard : MonoBehaviour
             {
                 if (textArea.text.Length > 0)
                 {
-                    textArea.text = textArea.text.Substring(0, textArea.text.Length - 1);
+                    textContent = textContent.Remove(cursorPosition - 1, 1);
+                    cursorPosition--;
                 }
             }
             else if (c == '\n' || c == '\r') // Handle Enter/Return
             {
-                AddNewLine();
+                if (textContent.Split('\n').Length < 10)
+                {
+                    textContent = textContent.Insert(cursorPosition, "\n");
+                    cursorPosition++;
+                }
             }
             else
             {
-                AddCharacter(c);
+                if (textContent.Length < 120)
+                {
+                    textContent = textContent.Insert(cursorPosition, c.ToString());
+                    cursorPosition++;
+                }
             }
         }
+        UpdateTextArea();
+    }
+    private void HandleCursorBlinking()
+    {
+        blinkTimer += Time.deltaTime;
+        if (blinkTimer >= cursorBlinkTime)
+        {
+            isCursorVisible = !isCursorVisible;
+            blinkTimer = 0f;
+            UpdateTextArea();
+        }
     }
 
-    private void AddNewLine()
+    private void HandleCursorMovement()
     {
-        // Split text into lines
-        string[] lines = textArea.text.Split('\n');
-
-        // Add a new line only if the total number of lines is less than 10
-        if (lines.Length < 10)
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            textArea.text += "\n";
+            if (cursorPosition > 0)
+            {
+                cursorPosition--;
+                UpdateTextArea();
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (cursorPosition < textContent.Length)
+            {
+                cursorPosition++;
+                UpdateTextArea();
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            MoveCursorVertically(-1);
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            MoveCursorVertically(1);
         }
     }
 
-    private void AddCharacter(char c)
+    private void MoveCursorVertically(int direction)
     {
-        // Check total character count
-        if (textArea.text.Length >= 120)
+        string[] lines = textContent.Split('\n');
+        int currentLine = 0;
+        int characterInLine = 0;
+        int charCount = 0;
+
+        for (int i = 0; i < lines.Length; i++)
         {
-            return; // Stop adding text if the limit is reached
+            if (cursorPosition <= charCount + lines[i].Length)
+            {
+                currentLine = i;
+                characterInLine = cursorPosition - charCount;
+                break;
+            }
+            charCount += lines[i].Length + 1; // +1 for the newline character
         }
 
-        string[] lines = textArea.text.Split('\n');
+        int newLine = Mathf.Clamp(currentLine + direction, 0, lines.Length - 1);
+        int newCursorPos = 0;
 
-        // Add a new line if the current line exceeds the maximum characters and total lines are less than 10
-        if (lines.Length > 0 && lines[lines.Length - 1].Length >= maxCharactersPerLine)
+        for (int i = 0; i < newLine; i++)
         {
-            AddNewLine();
+            newCursorPos += lines[i].Length + 1; // +1 for the newline character
         }
 
-        // Add the character to the text area only if total lines are less than 10
-        if (lines.Length < 10)
+        newCursorPos += Mathf.Clamp(characterInLine, 0, lines[newLine].Length);
+        cursorPosition = Mathf.Clamp(newCursorPos, 0, textContent.Length);
+
+        UpdateTextArea();
+    }
+
+
+    private void UpdateTextArea()
+    {
+        string displayText = textContent;
+
+        if (isCursorVisible && isClipboardActive)
         {
-            textArea.text += c;
+            displayText = displayText.Insert(cursorPosition, "|");
         }
+
+        textArea.text = displayText;
     }
 
 

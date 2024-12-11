@@ -38611,7 +38611,7 @@ MonoBehaviour:
   distanceFromCamera: 0.7
   restart: {fileID: 1722164665}
   pause: {fileID: 995239743}
-  maxCharactersPerLine: 12
+  maxCharactersPerLine: 10
 --- !u!1 &1199038774
 GameObject:
   m_ObjectHideFlags: 0
