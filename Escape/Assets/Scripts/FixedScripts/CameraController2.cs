@@ -26,6 +26,8 @@ public class CameraController2 : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] GameObject interactPossible;
+    [SerializeField] GameObject puzzle1Controls;
+    [SerializeField] GameObject FinalPuzzleControls;
 
     void Start()
     {
@@ -45,7 +47,7 @@ public class CameraController2 : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.E))
         {
             // Performs raycast to check if player is looking at object within pickuprange
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, detectionRange))
+            if (Physics.Raycast(transform.position + new Vector3(0, 0, 0.5f), transform.TransformDirection(Vector3.forward), out hit, detectionRange))
             {
                 if (hit.transform.gameObject.tag == "stationPuzzle")
                 {
@@ -54,6 +56,14 @@ public class CameraController2 : MonoBehaviour
                 if (hit.transform.gameObject.GetComponent<SpotPosition>() != null)
                 {
                     Focus(hit);
+                    if (hit.transform.gameObject.tag == "puzzle1" || hit.transform.gameObject.tag == "mixer" || hit.transform.gameObject.tag == "mibable")
+                    {
+                        puzzle1Controls.SetActive(true);
+                    }
+                    else if (hit.transform.gameObject.tag == "finalPuzzle")
+                    {
+                        FinalPuzzleControls.SetActive(true);
+                    }
                 }
             }
         }
@@ -88,6 +98,9 @@ public class CameraController2 : MonoBehaviour
                 transform.position = defaultSpot;
                 transform.parent = player.transform;
                 focusMode = false;
+
+                puzzle1Controls.SetActive(false);
+                FinalPuzzleControls.SetActive(false);
             }
         }
     }

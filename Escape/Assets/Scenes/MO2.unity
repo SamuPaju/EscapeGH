@@ -1871,6 +1871,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594262075}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &604759336 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4190367422053414564, guid: 01178a185534daf41b3e4b744cca7cba, type: 3}
+  m_PrefabInstance: {fileID: 5828616669700451279}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &607827086
 GameObject:
   m_ObjectHideFlags: 0
@@ -3867,6 +3872,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537133708}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1574302766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7008420194430000483, guid: 01178a185534daf41b3e4b744cca7cba, type: 3}
+  m_PrefabInstance: {fileID: 5828616669700451279}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1606961761 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000014249080164, guid: b4bb0068f29ebb54487c4154fba6f55f, type: 3}
@@ -9083,9 +9093,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1035987361745254633, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
+      propertyPath: detectionRange
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1035987361745254633, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
+      propertyPath: puzzle1Controls
+      value: 
+      objectReference: {fileID: 604759336}
+    - target: {fileID: 1035987361745254633, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
       propertyPath: interactPossible
       value: 
       objectReference: {fileID: 470630947}
+    - target: {fileID: 1035987361745254633, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
+      propertyPath: FinalPuzzleControls
+      value: 
+      objectReference: {fileID: 1574302766}
     - target: {fileID: 1998687320650050068, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
       propertyPath: m_Name
       value: Player3.0
@@ -14739,6 +14761,10 @@ PrefabInstance:
     - target: {fileID: 2222685408318471371, guid: 01178a185534daf41b3e4b744cca7cba, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703158369411052108, guid: 01178a185534daf41b3e4b744cca7cba, type: 3}
+      propertyPath: m_text
+      value: Left Mouse = Pick up and add
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

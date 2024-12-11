@@ -10,6 +10,8 @@ TagManager:
   - mixable
   - stationPuzzle
   - marble
+  - puzzle1
+  - finalPuzzle
   layers:
   - Default
   - TransparentFX
