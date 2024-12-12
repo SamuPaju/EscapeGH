@@ -56,7 +56,7 @@ public class CameraController2 : MonoBehaviour
                 if (hit.transform.gameObject.GetComponent<SpotPosition>() != null)
                 {
                     Focus(hit);
-                    if (hit.transform.gameObject.tag == "puzzle1" || hit.transform.gameObject.tag == "mixer" || hit.transform.gameObject.tag == "mibable")
+                    if (hit.transform.gameObject.tag == "puzzle1" || hit.transform.gameObject.tag == "mixer" || hit.transform.gameObject.tag == "mixable")
                     {
                         puzzle1Controls.SetActive(true);
                     }
