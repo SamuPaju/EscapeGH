@@ -35,7 +35,7 @@ public class Activator : MonoBehaviour
             // Get the value of the mixer
             adding = Mixers.instance.Mix();
             // Checks that the same color wasn't added twice
-            if (adding != index)
+            if (adding != index && adding != 0)
             {
                 currentlyAdded++;
                 index += adding;
