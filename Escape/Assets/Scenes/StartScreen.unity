@@ -1219,53 +1219,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 564303512}
   m_CullTransparentMesh: 1
---- !u!1 &571073690
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 571073692}
-  - component: {fileID: 571073691}
-  m_Layer: 0
-  m_Name: BrightnessSettings
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &571073691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571073690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13bbbc02c648dd343ae1adb22b7e50dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brightnessSlider: {fileID: 0}
-  postProcessVolume: {fileID: 608354066}
-  colorGrading: {fileID: 0}
---- !u!4 &571073692
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571073690}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &573186517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2914,6 +2867,5 @@ SceneRoots:
   - {fileID: 21323273}
   - {fileID: 573186519}
   - {fileID: 608354068}
-  - {fileID: 571073692}
   - {fileID: 6565465610764606090}
   - {fileID: 738647437}
