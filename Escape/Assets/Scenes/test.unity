@@ -5168,10 +5168,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7277163824122171815, guid: aa50f66dea723ad43bd7aa51e3377448, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1568453275}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa50f66dea723ad43bd7aa51e3377448, type: 3}
 --- !u!1 &152403309
 GameObject:
@@ -15265,11 +15262,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.10000014, y: 1.0000005, z: 4}
   m_Center: {x: 0.00000011920929, y: 0.00000023841858, z: 2.0068998}
---- !u!1 &476409157 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7277163824122171815, guid: aa50f66dea723ad43bd7aa51e3377448, type: 3}
-  m_PrefabInstance: {fileID: 151304959}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &477118594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19957,7 +19949,6 @@ GameObject:
   - component: {fileID: 614462573}
   - component: {fileID: 614462572}
   - component: {fileID: 614462571}
-  - component: {fileID: 614462570}
   m_Layer: 0
   m_Name: clipboard (1)
   m_TagString: Untagged
@@ -19981,18 +19972,6 @@ Transform:
   - {fileID: 1974036915}
   m_Father: {fileID: 537745318}
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
---- !u!114 &614462570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614462568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2877b9f9051fc4243acf45bd4062afe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &614462571
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -21271,7 +21250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 604588728166775769, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.06
+      value: -8.849
       objectReference: {fileID: 0}
     - target: {fileID: 604588728166775769, guid: a3d320341c5740042b44defe2d47deb0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -49375,18 +49354,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4719576771291897517, guid: aa50f66dea723ad43bd7aa51e3377448, type: 3}
   m_PrefabInstance: {fileID: 151304959}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1568453275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 476409157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2877b9f9051fc4243acf45bd4062afe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1570542902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50400,7 +50367,6 @@ GameObject:
   - component: {fileID: 1599267341}
   - component: {fileID: 1599267340}
   - component: {fileID: 1599267339}
-  - component: {fileID: 1599267343}
   m_Layer: 0
   m_Name: clipboard
   m_TagString: Untagged
@@ -50510,18 +50476,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599267337}
   m_Mesh: {fileID: 6447410340687490187, guid: 00ee5e89e32271847a8888d2f58f330b, type: 3}
---- !u!114 &1599267343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1599267337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2877b9f9051fc4243acf45bd4062afe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1600497831
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65540,7 +65494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 212, y: 0}
+  m_AnchoredPosition: {x: 133, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2087831846
@@ -65563,7 +65517,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ???
+  m_text: '?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 28b6fef02e1a63e4d97dd27bfec36037, type: 2}
   m_sharedMaterial: {fileID: -1510352501857832659, guid: 28b6fef02e1a63e4d97dd27bfec36037, type: 2}
@@ -68166,7 +68120,6 @@ GameObject:
   - component: {fileID: 4069232746508948017}
   - component: {fileID: 161851218}
   - component: {fileID: 8838525918294076122}
-  - component: {fileID: 8838525918294076123}
   m_Layer: 0
   m_Name: clipboard
   m_TagString: Untagged
@@ -68195,18 +68148,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.15297675
   m_Center: {x: 0, y: 0.00000017881393, z: 0.08692193}
---- !u!114 &8838525918294076123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8838525918294076121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2877b9f9051fc4243acf45bd4062afe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
