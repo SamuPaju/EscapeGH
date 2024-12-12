@@ -27,7 +27,7 @@ public class GameEnd : MonoBehaviour
 
     private IEnumerator EndActivate()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         end.Invoke();
 
         // Fade in white screen
