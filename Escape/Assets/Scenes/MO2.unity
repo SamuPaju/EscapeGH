@@ -14762,9 +14762,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 4190367422053414564, guid: 01178a185534daf41b3e4b744cca7cba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5703158369411052108, guid: 01178a185534daf41b3e4b744cca7cba, type: 3}
       propertyPath: m_text
       value: Left Mouse = Pick up and add
+      objectReference: {fileID: 0}
+    - target: {fileID: 7008420194430000483, guid: 01178a185534daf41b3e4b744cca7cba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
