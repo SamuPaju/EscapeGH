@@ -25,10 +25,10 @@ public class PuzzleManager : MonoBehaviour
         saveFilePath = Path.Combine(Application.persistentDataPath, "saveData.json");
 
         // Load saved player position and puzzle states on startup
-        LoadPlayerPosition();
+        //LoadPlayerPosition();
 
         // Delete all saves (for debugging or testing purposes)
-        //DeleteAllSaves();
+        DeleteAllSaves();
     }
 
     private void Update()
