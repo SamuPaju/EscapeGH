@@ -11,6 +11,7 @@ public class Mover : MonoBehaviour
     [SerializeField] bool spinning;
     [SerializeField] bool spinVecUp;
     [SerializeField] bool spinVecRight;
+
     // + rotates clockwise, - rotates counterclockwise
     [SerializeField] float speed;
 
@@ -27,12 +28,18 @@ public class Mover : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Moves object back and forward (useless at the moment and not completed)
+    /// </summary>
     void MoveObject()
     {
         //---Works one way---
         //transform.position = new Vector3(transform.position.x + moveSpeed * Time.deltaTime, transform.position.y, transform.position.z);
     }
 
+    /// <summary>
+    /// Spins object on certain axis
+    /// </summary>
     void SpinObject()
     {
         // Check which direction object should be rotating

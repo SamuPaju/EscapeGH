@@ -14,12 +14,17 @@ public class Restart : MonoBehaviour
 
     void Update()
     {
+        // Calls RestartGame() if M is pressed
         if (Input.GetKeyDown(KeyCode.M))
         {
             RestartGame();
         }
     }
 
+    /// <summary>
+    /// If player hits this objects BoxCollider call RestartGame()
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -28,6 +33,9 @@ public class Restart : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Restart the hole game
+    /// </summary>
     public void RestartGame()
     {
         Cursor.lockState = CursorLockMode.None;

@@ -49,13 +49,16 @@ public class CameraController2 : MonoBehaviour
             // Performs raycast to check if player is looking at object within pickuprange
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, detectionRange))
             {
+                // If Raycast hitted an object with the tag stationPuzzle start the marble course
                 if (hit.transform.gameObject.tag == "stationPuzzle")
                 {
                     StationActivator.instance.ActivateStation(1);
                 }
+                // If the hitted object has SpotPosition script call Focus()
                 if (hit.transform.gameObject.GetComponent<SpotPosition>() != null)
                 {
                     Focus(hit);
+                    // Check witch puzzle player hit and activate correct control information UI
                     if (hit.transform.gameObject.tag == "puzzle1" || hit.transform.gameObject.tag == "mixer" || hit.transform.gameObject.tag == "mixable")
                     {
                         puzzle1Controls.SetActive(true);
@@ -68,8 +71,8 @@ public class CameraController2 : MonoBehaviour
             }
         }
 
-        // Checks if player is looking at a special object all the time
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out detectionHit, detectionRange)) //change E to whichever key you want
+        // Checks if player is looking at a special object all the time (for interact ui)
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out detectionHit, detectionRange))
         {
             if (detectionHit.transform.gameObject.tag == "stationPuzzle")
             {

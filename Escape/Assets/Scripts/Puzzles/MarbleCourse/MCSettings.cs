@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MCSettings : MonoBehaviour
 {
-    BoxCollider boxCollider;
     [SerializeField] Transform cam;
 
     Vector3 startPos;
@@ -15,7 +14,6 @@ public class MCSettings : MonoBehaviour
     
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider>();
         startPos = transform.localPosition;
         startRot = transform.rotation;
         marbleStartPos = marble.transform.localPosition;
@@ -36,7 +34,7 @@ public class MCSettings : MonoBehaviour
             Deactivate();
         }
 
-        // L wins the course (for testing purposes)
+        // Pressing L wins the course (for testing purposes)
         if (Input.GetKeyDown(KeyCode.L))
         {
             marble.transform.localPosition = new Vector3(0.2391f, 0.492f, -0.2114f);
@@ -61,7 +59,7 @@ public class MCSettings : MonoBehaviour
     }
 
     /// <summary>
-    /// Restarts the game
+    /// Resets the game
     /// </summary>
     public void Restart()
     {
@@ -73,7 +71,7 @@ public class MCSettings : MonoBehaviour
     }
 
     /// <summary>
-    /// Moves the platform
+    /// Rotates the platform based on the cmaera rotations
     /// </summary>
     void Rotate()
     {

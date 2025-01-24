@@ -21,7 +21,7 @@ public class RightOrder : MonoBehaviour
         {
             if (!puzzleIsDone) // Is puzzle done
             {
-                // Invokes a UnityEvent
+                // Invokes a UnityEvent and marks the puzzle done
                 correctOrder.Invoke();
                 puzzleIsDone = true;
             }

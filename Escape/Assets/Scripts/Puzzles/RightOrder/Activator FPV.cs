@@ -13,7 +13,7 @@ public class ActivatorFPV : MonoBehaviour
     {
         var ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0)) // Left mouse button
+        if (Input.GetMouseButtonDown(0)) // Checks if the left mouse button was pressed
         {
             // Does the Raycast
             if (Physics.Raycast(ray, out var hit))

@@ -11,6 +11,7 @@ public class EndMarble : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // If marble hits this objects BoxCollider player wins
         if (other.gameObject.CompareTag("marble"))
         {
             puzzleDone = true;
